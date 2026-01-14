@@ -22,36 +22,19 @@ resources:
     cpu: 500m
 
 ingress:
-  minio:
-    enabled: true
-    ingressClassName: nginx
-    hosts:
-      - host: minio.student-yzpc.dski23a.timebertt.dev
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-    tls:
-      - secretName: minio-tls-secret
-        hosts:
-          - minio.student-yzpc.dski23a.timebertt.dev
-
-  console:
-    enabled: true
-    ingressClassName: nginx
-    hosts:
-      - host: minio-ui.student-yzpc.dski23a.timebertt.dev
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-    tls:
-      - secretName: minio-console-tls-secret
-        hosts:
-          - minio-ui.student-yzpc.dski23a.timebertt.dev
-
+  enabled: true
+  ingressClassName: "nginx"
+  pathType: ImplementationSpecific
+  hosts:
+    - minio.student-yzpc.dski23a.timebertt.dev
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  tls:
+    - secretName: minio-tls-cert
+      hosts:
+        - minio.student-yzpc.dski23a.timebertt.dev
 
 # DEAKTIVIEREN, um den Webhook-Konflikt zu lösen
 consoleIngress:
