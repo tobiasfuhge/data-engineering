@@ -1,7 +1,28 @@
+# Grundmodus
 mode: standalone
 replicas: 1
 
+# Authentifizierung über dein bestehendes Secret
 auth:
-  existingSecret: minio
-  rootUserSecretKey: root-user
-  rootPasswordSecretKey: root-password
+  existingSecret: "minio"
+  rootUserSecretKey: "root-user"
+  rootPasswordSecretKey: "root-password"
+
+# Ressourcen-Anpassung gegen "Insufficient memory"
+# Diese Werte sind klein genug für fast jeden Node
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+  limits:
+    memory: 512Mi
+    cpu: 500m
+
+# Persistence (Anpassung je nach Bedarf)
+persistence:
+  enabled: true
+  size: 5Gi
+
+# Deaktiviere das Provisioning von Buckets beim Start, 
+# falls du keine speziellen Policies im Secret hinterlegt hast
+buckets: []
