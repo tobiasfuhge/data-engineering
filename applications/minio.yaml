@@ -7,9 +7,9 @@ spec:
   project: default
 
   sources:
-  - repoURL: https://helm.min.io/
+  - repoURL: https://charts.bitnami.com/bitnami
     chart: minio
-    targetRevision: 8.0.10
+    targetRevision: 17.0.21
     helm:
       parameters:
         - name: mode
