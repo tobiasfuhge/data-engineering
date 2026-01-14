@@ -2,13 +2,13 @@
 mode: standalone
 replicas: 1
 
-# Authentifizierung über dein Secret
+# Authentifizierung
 auth:
   existingSecret: "minio"
   rootUserSecretKey: "root-user"
   rootPasswordSecretKey: "root-password"
 
-# Deine gewünschte Persistence-Konfiguration
+# Persistence
 persistence:
   enabled: true
   size: 10Gi
@@ -16,7 +16,7 @@ persistence:
   accessModes:
     - ReadWriteOnce
 
-# Ressourcen-Limits (Wichtig, damit der Scheduler den Pod auf deine Nodes lässt)
+# Ressourcen-Limits
 resources:
   requests:
     memory: 256Mi
@@ -25,13 +25,20 @@ resources:
     memory: 512Mi
     cpu: 500m
 
-# Verhindert Fehlermeldungen, falls keine Buckets definiert sind
-buckets: []
-
+# Ingress Konfiguration
 ingress:
   enabled: true
-  ingressClassName: nginx
-  hostname: minio.yqzc.dski23a.timebertt.dev
+  ingressClassName: "nginx"
+  path: /
+  hosts:
+    - minio.yqzc.dski23a.timebertt.dev
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-  tls: true
+    cert-manager.io/cluster-issuer: "letsencrypt"
+    # Optional: Falls MinIO SSL-Redirects erzwingen soll
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  tls:
+    - secretName: minio-tls-cert
+      hosts:
+        - minio.yqzc.dski23a.timebertt.dev
+
+buckets: []
