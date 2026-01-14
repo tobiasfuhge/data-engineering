@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
 
-  sources:
+  source:
   - repoURL: https://charts.bitnami.com/bitnami
     chart: minio
     targetRevision: 17.0.21
