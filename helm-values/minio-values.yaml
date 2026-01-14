@@ -2,14 +2,21 @@
 mode: standalone
 replicas: 1
 
-# Authentifizierung über dein bestehendes Secret
+# Authentifizierung über dein Secret
 auth:
   existingSecret: "minio"
   rootUserSecretKey: "root-user"
   rootPasswordSecretKey: "root-password"
 
-# Ressourcen-Anpassung gegen "Insufficient memory"
-# Diese Werte sind klein genug für fast jeden Node
+# Deine gewünschte Persistence-Konfiguration
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: "local-path"
+  accessModes:
+    - ReadWriteOnce
+
+# Ressourcen-Limits (Wichtig, damit der Scheduler den Pod auf deine Nodes lässt)
 resources:
   requests:
     memory: 256Mi
@@ -18,11 +25,5 @@ resources:
     memory: 512Mi
     cpu: 500m
 
-# Persistence (Anpassung je nach Bedarf)
-persistence:
-  enabled: true
-  size: 5Gi
-
-# Deaktiviere das Provisioning von Buckets beim Start, 
-# falls du keine speziellen Policies im Secret hinterlegt hast
+# Verhindert Fehlermeldungen, falls keine Buckets definiert sind
 buckets: []
