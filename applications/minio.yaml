@@ -8,9 +8,8 @@ spec:
   project: default
 
   sources:
-  - repoURL: https://charts.bitnami.com/bitnami
-    chart: minio
-    targetRevision: 17.0.21
+  - repoURL: https://helm.min.io/
+    targetRevision: 8.0.10
     helm:
       valueFiles:
         - $values/helm-values/minio-values.yaml
