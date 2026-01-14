@@ -5,22 +5,18 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
+  sources:
+  - repoURL: https://charts.min.io/
     chart: minio
-    repoURL: https://charts.min.io/
     targetRevision: 5.0.0
     helm:
-      values: |
-        mode: standalone
-        replicas: 1
-        # Hier wird dein Secret eingebunden
-        auth:
-          existingSecret: "minio"
-          rootUserSecretKey: "root-user"
-          rootPasswordSecretKey: "root-password"
-        persistence:
-          enabled: true
-          size: 10Gi
+      valueFiles:
+        - $values/helm-values/minio-values.yaml
+      timeout: 300
+  - repoURL: https://github.com/tobiasfuhge/data-engineering.git
+    targetRevision: main
+    ref: values
+
   destination:
     server: https://kubernetes.default.svc
     namespace: minio-storage
