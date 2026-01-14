@@ -28,31 +28,20 @@ resources:
 ingress:
   enabled: true
   ingressClassName: "nginx"
-  # Das offizielle Chart nutzt 'hosts' (Liste), nicht 'hostname'
   hosts:
     - minio.yqzc.dski23a.timebertt.dev
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-  # Das offizielle Chart braucht hier eine Liste für TLS
+    # Wichtig: MinIO braucht oft dieses Annotation für automatische Redirects
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
   tls:
     - secretName: minio-tls-cert
       hosts:
         - minio.yqzc.dski23a.timebertt.dev
 
-# SEHR WICHTIG: 
-# Das offizielle Chart trennt API und Console. 
-# Ohne diesen Block kommst du nicht auf die Weboberfläche!
+# Deaktivieren, um den Webhook-Fehler zu vermeiden
 consoleIngress:
-  enabled: true
-  ingressClassName: "nginx"
-  hosts:
-    - minio.yqzc.dski23a.timebertt.dev
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt"
-  tls:
-    - secretName: minio-tls-cert
-      hosts:
-        - minio.yqzc.dski23a.timebertt.dev
+  enabled: false
 
 buckets: []
