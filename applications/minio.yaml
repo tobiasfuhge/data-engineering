@@ -5,29 +5,25 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
-  - repoURL: https://charts.bitnami.com/bitnami
     chart: minio
-    targetRevision: 17.0.21
+    repoURL: https://charts.min.io/
+    targetRevision: 5.0.0
     helm:
-      parameters:
-        - name: mode
-          value: standalone
-        - name: replicas
-          value: "1"
-        - name: auth.existingSecret
-          value: minio
-        - name: auth.rootUserSecretKey
-          value: root-user
-        - name: auth.rootPasswordSecretKey
-          value: root-password
-      timeout: 300
-
+      values: |
+        mode: standalone
+        replicas: 1
+        # Hier wird dein Secret eingebunden
+        auth:
+          existingSecret: "minio"
+          rootUserSecretKey: "root-user"
+          rootPasswordSecretKey: "root-password"
+        persistence:
+          enabled: true
+          size: 10Gi
   destination:
     server: https://kubernetes.default.svc
-    namespace: data-storage
-
+    namespace: minio-storage
   syncPolicy:
     automated:
       prune: true
