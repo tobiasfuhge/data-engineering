@@ -12,7 +12,6 @@ spec:
     helm:
       valueFiles:
         - $values/helm-values/minio-values.yaml
-      timeout: 300
   - repoURL: https://github.com/tobiasfuhge/data-engineering.git
     targetRevision: main
     ref: values
