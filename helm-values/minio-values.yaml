@@ -26,7 +26,7 @@ ingress:
   ingressClassName: "nginx"
   pathType: ImplementationSpecific
   hosts:
-    - minio.yqzc.dski23a.timebertt.dev
+    - minio.student-yqzc.dski23a.timebertt.dev
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -34,7 +34,7 @@ ingress:
   tls:
     - secretName: minio-tls-cert
       hosts:
-        - minio.yqzc.dski23a.timebertt.dev
+        - minio.student-yqzc.dski23a.timebertt.dev
 
 # DEAKTIVIEREN, um den Webhook-Konflikt zu lösen
 consoleIngress:
