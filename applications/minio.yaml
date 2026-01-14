@@ -1,4 +1,3 @@
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -12,13 +11,19 @@ spec:
     chart: minio
     targetRevision: 8.0.10
     helm:
-      valueFiles:
-        - $values/helm-values/minio-values.yaml
-      timeout: 1000
-  - repoURL: https://github.com/tobiasfuhge/data-engineering.git
-    targetRevision: main
-    ref: values
-    
+      parameters:
+        - name: mode
+          value: standalone
+        - name: replicas
+          value: "1"
+        - name: auth.existingSecret
+          value: minio
+        - name: auth.rootUserSecretKey
+          value: root-user
+        - name: auth.rootPasswordSecretKey
+          value: root-password
+      timeout: 300
+
   destination:
     server: https://kubernetes.default.svc
     namespace: data-storage
