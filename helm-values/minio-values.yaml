@@ -1,14 +1,11 @@
-# Grundmodus
 mode: standalone
 replicas: 1
 
-# Authentifizierung
 auth:
   existingSecret: "minio"
   rootUserSecretKey: "root-user"
   rootPasswordSecretKey: "root-password"
 
-# Persistence
 persistence:
   enabled: true
   size: 10Gi
@@ -16,7 +13,6 @@ persistence:
   accessModes:
     - ReadWriteOnce
 
-# Ressourcen-Limits
 resources:
   requests:
     memory: 256Mi
@@ -28,19 +24,19 @@ resources:
 ingress:
   enabled: true
   ingressClassName: "nginx"
+  pathType: ImplementationSpecific
   hosts:
     - minio.yqzc.dski23a.timebertt.dev
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    # Wichtig: MinIO braucht oft dieses Annotation für automatische Redirects
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
   tls:
     - secretName: minio-tls-cert
       hosts:
         - minio.yqzc.dski23a.timebertt.dev
 
-# Deaktivieren, um den Webhook-Fehler zu vermeiden
+# DEAKTIVIEREN, um den Webhook-Konflikt zu lösen
 consoleIngress:
   enabled: false
 
