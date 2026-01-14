@@ -1,29 +1,31 @@
-# Grundmodus
 mode: standalone
 replicas: 1
 
-# Authentifizierung über dein Secret
 auth:
-  existingSecret: "minio"
-  rootUserSecretKey: "root-user"
-  rootPasswordSecretKey: "root-password"
+  existingSecret: minio
+  rootUserSecretKey: root-user
+  rootPasswordSecretKey: root-password
 
-# Deine gewünschte Persistence-Konfiguration
 persistence:
   enabled: true
   size: 10Gi
-  storageClass: "local-path"
+  storageClass: local-path
   accessModes:
     - ReadWriteOnce
 
-# Ressourcen-Limits (Wichtig, damit der Scheduler den Pod auf deine Nodes lässt)
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hostname: minio.timebertt.dski23a.timebertt.dev
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  tls: true
+
 resources:
   requests:
-    memory: 256Mi
-    cpu: 100m
-  limits:
     memory: 512Mi
+    cpu: 250m
+  limits:
+    memory: 1Gi
     cpu: 500m
-
-# Verhindert Fehlermeldungen, falls keine Buckets definiert sind
-buckets: []
