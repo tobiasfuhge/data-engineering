@@ -19,7 +19,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: minio-storage
+    namespace: data-storage
   syncPolicy:
     automated:
       prune: true
