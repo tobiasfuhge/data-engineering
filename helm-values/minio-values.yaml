@@ -1,10 +1,7 @@
 mode: standalone
 replicas: 1
 
-
-existingSecret: "minio"
-rootUserSecretKey: "access_key"
-rootPasswordSecretKey: "secret_key"
+existingSecret: minio
 
 persistence:
   enabled: true
