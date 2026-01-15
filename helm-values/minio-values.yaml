@@ -18,12 +18,9 @@ resources:
     memory: 512Mi
     cpu: 500m
 
-# ... (deine bestehende Config)
-
 ingress:
   enabled: true
   ingressClassName: "nginx"
-  # Die API bleibt unter der Haupt-URL
   hosts:
     - minio.student-yzpc.dski23a.timebertt.dev
   tls:
@@ -31,7 +28,6 @@ ingress:
       hosts:
         - minio.student-yzpc.dski23a.timebertt.dev
 
-# AKTIVIEREN, aber mit eigener Subdomain (z.B. "console-minio...")
 consoleIngress:
   enabled: true
   ingressClassName: "nginx"
