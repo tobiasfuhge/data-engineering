@@ -2,8 +2,9 @@ mode: standalone
 replicas: 1
 
 
-rootUser: "meinadmin"
-rootPassword: "meinpasswort123"
+existingSecret: "minio"
+rootUserSecretKey: "access_key"
+rootPasswordSecretKey: "secret_key"
 
 persistence:
   enabled: true
