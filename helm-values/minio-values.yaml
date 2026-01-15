@@ -21,23 +21,32 @@ resources:
     memory: 512Mi
     cpu: 500m
 
+# ... (deine bestehende Config)
+
 ingress:
   enabled: true
   ingressClassName: "nginx"
-  pathType: ImplementationSpecific
+  # Die API bleibt unter der Haupt-URL
   hosts:
     - minio.student-yzpc.dski23a.timebertt.dev
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
   tls:
     - secretName: minio-tls-cert
       hosts:
         - minio.student-yzpc.dski23a.timebertt.dev
 
-# DEAKTIVIEREN, um den Webhook-Konflikt zu lösen
+# AKTIVIEREN, aber mit eigener Subdomain (z.B. "console-minio...")
 consoleIngress:
-  enabled: false
+  enabled: true
+  ingressClassName: "nginx"
+  hosts:
+    - console-minio.student-yzpc.dski23a.timebertt.dev
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  tls:
+    - secretName: minio-console-tls-cert
+      hosts:
+        - console-minio.student-yzpc.dski23a.timebertt.dev
 
 buckets: []
