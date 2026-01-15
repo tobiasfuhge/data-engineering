@@ -3,8 +3,8 @@ replicas: 1
 
 auth:
   existingSecret: "minio"
-  rootUserSecretKey: "root-user"
-  rootPasswordSecretKey: "root-password"
+  rootUserSecretKey: "rootUser"
+  rootPasswordSecretKey: "rootPassword"
 
 persistence:
   enabled: true
