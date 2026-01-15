@@ -2,9 +2,10 @@ mode: standalone
 replicas: 1
 
 auth:
-  existingSecret: "minio"
-  rootUserSecretKey: "rootUser"
-  rootPasswordSecretKey: "rootPassword"
+  enabled: true
+  # existingSecret: "minio"  <-- Das MUSS weg oder auskommentiert sein!
+  rootUser: "meinadmin"
+  rootPassword: "meinpasswort123"
 
 persistence:
   enabled: true
