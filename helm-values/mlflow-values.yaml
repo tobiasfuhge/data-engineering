@@ -7,19 +7,20 @@ backendStore:
     host: "postgres.data-storage.svc.cluster.local"
     port: 5432
     database: "ds_db"
-    user: "mlops"
-    # Verweis auf das Secret statt Klartext:
-    passwordSecretName: "postgres-admin"
-    passwordSecretKey: "postgres-password"
+
+  existingDatabaseSecret:
+    name: postgres-admin
+    usernameKey: postgres-user
+    passwordKey: postgres-password
 
 artifactRoot:
   s3:
     enabled: true
     bucket: "hello-world-bucket"
-    awsAccessKeyId: "minioadmin"
-    # Verweis auf das Secret statt Klartext:
-    existingSecret: "minio"
-    awsSecretAccessKeySecretKey: "root-password"
+    existingSecret:
+      name: "minio"
+      keyOfAccessKeyId: "root-user"
+      keyOfSecretAccessKey: "root-password"
 
 
 extraEnvVars:
