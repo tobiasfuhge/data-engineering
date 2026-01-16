@@ -9,8 +9,8 @@ backendStore:
     database: "ds_db"
     user: "mlops"
     # Verweis auf das Secret statt Klartext:
-    passwordSecretName: "postgres-auth"
-    passwordSecretKey: "db-password"
+    passwordSecretName: "postgres-admin"
+    passwordSecretKey: "postgres-password"
 
 artifactRoot:
   s3:
