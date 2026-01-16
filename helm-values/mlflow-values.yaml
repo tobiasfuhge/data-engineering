@@ -37,9 +37,13 @@ ingress:
   enabled: true
   annotations: 
     cert-manager.io/cluster-issuer: letsencrypt-prod
-  ingressClassName: nginx
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
   hosts: 
-    - mlflow.student-yzpc.dski23a.timebertt.dev
+    - host: mlflow.student-yzpc.dski23a.timebertt.dev
+      paths:
+        - path: /
+          pathType: ImplementationSpecific   
   tls: 
     - hosts:
         - mlflow.student-yzpc.dski23a.timebertt.dev
