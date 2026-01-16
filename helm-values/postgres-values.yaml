@@ -1,7 +1,6 @@
 # postgres-values.yaml (für cloudpirates/postgres)
 config:
   postgresDb: "ds_db"
-  postgresUser: "mlops"
   # Das cloudpirates Chart nutzt oft direkt Envs oder ein Secret per envFrom.
   # Falls es existingSecret nicht direkt unterstützt, nutzen wir:
   existingSecret: "postgres-admin"
