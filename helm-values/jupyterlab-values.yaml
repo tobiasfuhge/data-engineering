@@ -57,7 +57,7 @@ singleuser:
     AWS_DEFAULT_REGION: "us-east-1"
 
     # --- Postgres ---
-    POSTGRES_HOST: "postgres-postgresql.data-storage.svc.cluster.local"
+    POSTGRES_HOST: "postgres.data-storage.svc.cluster.local"
     POSTGRES_PORT: "5432"
     POSTGRES_DB: "ds_db"
 
