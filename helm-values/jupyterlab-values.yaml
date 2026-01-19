@@ -17,8 +17,8 @@ proxy:
 
 singleuser:
   image:
-    name: jupyter/base-notebook
-    tag: lab-4.0.5
+    name: ghcr.io/tobiasfuhge/jupyter-lab
+    tag: "1.0"
 
   # Storage configuration must match chart schema
   storage:
