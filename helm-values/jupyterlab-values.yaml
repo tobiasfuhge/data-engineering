@@ -66,6 +66,8 @@ singleuser:
 
     MLFLOW_S3_ENDPOINT_URL: "http://minio.data-storage.svc.cluster.local:9000"
 
+    MLFLOW_TRACKING_URI: "http://mlflow.mlops.svc.cluster.local:5000"
+
     AWS_DEFAULT_REGION: "us-east-1"
 
     # --- Postgres ---
